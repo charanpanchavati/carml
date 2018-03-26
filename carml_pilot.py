@@ -1,4 +1,5 @@
 """"
+The code being modified is from: https://blog.coast.ai/training-a-deep-learning-model-to-steer-a-car-in-99-lines-of-code-ba94e0456e6a
 With admiration for and inspiration from:
     https://github.com/dolaameng/Udacity-SDC_Behavior-Cloning/
     https://devblogs.nvidia.com/parallelforall/deep-learning-self-driving-cars/
