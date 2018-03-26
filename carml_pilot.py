@@ -16,7 +16,7 @@ from keras.preprocessing.image import img_to_array, load_img, flip_axis, random_
 
 
 NUM_OUTPUTS = 2
-SPEED = 1.0;
+SPEED = 1.0
 def model(load, shape, checkpoint=None):
     """Return a model from file or to train on."""
     if load and checkpoint: return load_model(checkpoint)
@@ -92,14 +92,6 @@ def _generator(batch_size, X, y):
             batch_X.append(image)
             batch_y.append(sa)
         yield np.array(batch_X), np.array(batch_y)
-
-def train():
-    """Load our network and our data, fit the model, save it."""
-    net = model(load=False, shape=(100, 100, 3))
-    X, y = get_X_y('./data/t1_1/driving_log.csv')
-    net.fit_generator(_generator(256, X, y), samples_per_epoch=20224, nb_epoch=2)
-    net.save('checkpoints/short.h5')
-
 
 #------------------
 
