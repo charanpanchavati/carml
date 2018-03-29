@@ -17,9 +17,10 @@ from PIL import Image
 
 BATCH_SIZE = 128
 TRAINING_SPLIT = 0.8
-EPOCHS = 20
+EPOCHS = 40
 
 prefix = '/Users/ganeshsr/Desktop/misc/robocar_donkey/test'
+app_prefix = "/Applications/donkey_sim.app/"
 output_path = os.path.join(prefix, 'output')
 model_path = os.path.join(prefix, 'model')
 param_path = os.path.join(prefix, 'input/config/hyperparameters.json')
@@ -28,8 +29,8 @@ model_loc = os.path.join(model_path, 'car-model.pkl')
 
 # This algorithm has a single channel of input data called 'training'. Since we run in
 # File mode, the input files are copied to the directory specified here.
-channel_name='log_train'
-training_path = os.path.join(prefix, channel_name)
+channel_name='log'
+training_path = os.path.join(app_prefix, channel_name)
 
 INPUT_TENSOR_NAME = "inputs"
 SIGNATURE_NAME = "serving_default"
@@ -609,7 +610,7 @@ def default_categorical_new():
     x = Convolution2D(32, (3, 3), strides=(2,2), activation='relu')(
         x)  # 24 features, 5 pixel x 5 pixel kernel (convolution, feauture) window, 2wx2h stride, relu activation
 
-    x = MaxPooling2D(data_format="channels_last")(x)
+    #x = MaxPooling2D(data_format="channels_last")(x)
     print("here11111!!!!!")
     for cl in conv_layers:
         x = Convolution2D(cl, (3, 3), activation='relu')(x)
@@ -685,7 +686,7 @@ def train():
         model = default_categorical_new()
         hist = model.fit_generator(
                             train_gen,
-                            steps_per_epoch=10,
+                            steps_per_epoch=100,
                             epochs=EPOCHS,
                             verbose=1,
                             validation_data=val_gen,
@@ -710,7 +711,6 @@ if __name__ == '__main__':
 
     # A zero exit code causes the job to be marked a Succeeded.
     sys.exit(0)
-
 
 
 
